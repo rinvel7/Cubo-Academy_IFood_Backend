@@ -1,6 +1,3 @@
-//produto a vista com desconto 10%
-//parcela sem juros sem desconto 6x
-//imprima como o cliente tem  que pagar, incluindo valor da parcela
 
 const valorDaCompra = 100;
 const numeroDeParcelas = 1;
