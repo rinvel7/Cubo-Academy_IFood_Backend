@@ -5,4 +5,4 @@ let  i = 0
 while( i < numeros.length){
     console.log(numeros[i])
     i++
-}
+}//imprime arrays
