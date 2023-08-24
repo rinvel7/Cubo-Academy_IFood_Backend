@@ -1,3 +1,6 @@
+//DESESTRUTURAR: Pegar so as propiedades que precisamos.
+
+
 const pessoa = {
     nome: 'Rina',
     idade: 44,
@@ -5,10 +8,10 @@ const pessoa = {
     profissao: "Dev"
 }
 
-//DESESTRUTURA
+//Sintaxis
 
-const {nome, idade, ... outros} = pessoa;
+const {nome, idade, ... outros} = pessoa; //so tomamos do objeto pessoa as propiedade nome e idade
 
 console.log(nome, idade);
-console.log(outros)
+console.log(outros)// tambem e um spread-operator
 

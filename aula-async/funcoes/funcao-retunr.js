@@ -1,3 +1,5 @@
+//RETUNR: ele trae de volta un valor
+
 function verificarMaiorIdade(idade){
     if(idade >=18){
         return true;

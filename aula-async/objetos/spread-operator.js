@@ -1,3 +1,5 @@
+//SPREAD-OPERATOR: Adjunta as propiedades de dois objetos
+
 const pessoa = {
     nome: 'Rina',
     idade: 44,
@@ -11,7 +13,7 @@ const endereco = {
     barrio: 'Beleza'
 }
 
-const objetoAjuntado = {
+const objetoAjuntado = {//variavei que ajunta as propiedades dos objetos acima.
     ...pessoa,
     ...endereco,
     novaPropiedade: 20

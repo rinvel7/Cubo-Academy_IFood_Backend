@@ -1,7 +1,8 @@
-//METODO E UNA FUNCAO DENTRO DE DA PROPIEDADE DE UN OBJETO
+//METODO: E uma funcao dentro de un ibjeto.
+
 //UMA vez que as funcoes estejan dentro de  as propiedade de um objeto
 // as variaveis tem  que ter a palavra this. ao inicio porque elas 
-//pertencen a propiedade.
+//pertencen a issa propiedade.
 
 
 const pessoa1 = 

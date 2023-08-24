@@ -1,3 +1,5 @@
+//RECEBER RETUNR DE OUTRA FUNCAO
+
 function etariaDaPessoa(idade) {
     if(idade < 21){
        return 'Jovem'
