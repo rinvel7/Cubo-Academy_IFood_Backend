@@ -15,7 +15,7 @@ for(let letra of arrayDeNomeCompleto){
     
 }
 
-console.log(nomeFormatado.trim());
+console.log(nomeFormatado);
 
 
 
