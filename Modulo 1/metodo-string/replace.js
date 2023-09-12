@@ -1,5 +1,5 @@
 //METODO REPLACE() ele substitui um texto por um novo texto
-// procura por um texto numa stru=ing  e substitui a primeira ocurrencia por o novo texto ao encontrar. 
+// procura por um texto numa string  e substitui a primeira ocurrencia por o novo texto ao encontrar. 
 
 //replace(text, newText),
 
