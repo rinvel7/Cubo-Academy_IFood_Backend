@@ -3,6 +3,8 @@ const professores = require('../bancodados')
 const filtrarProfessores = (requisicao, resposta)=> {
     const { stack } = requisicao.query;
     let resultado = professores;
+
+    console.log('Cheguei ao controlador de listagem de professores');
     
     if(stack){
         resultado = professores.filter((professor)=>{
