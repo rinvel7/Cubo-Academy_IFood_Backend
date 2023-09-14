@@ -13,7 +13,7 @@ const {
 
 const app = express();
 
-//INTERMEDIARIO
+//INTERMEDIARIOS INDEPENDIENTES
 const primeiroIntermediario = ((req, res, next)=>{
     console.log('Passei meu primeiro intermediario');
     next();
@@ -24,14 +24,21 @@ const segundoIntermediario = ((req, res, next)=>{
     next();
 });
 
-app.use(primeiroIntermediario)
-app.use(segundoIntermediario)
+//INTERMEDIARIOS DA ROTA
+const intermediarioDaRota = ((req, res, next)=>{
+    console.log('Passei meu intermediario da rota');
+    next();
+});
+
+// app.use(primeiroIntermediario)
+// app.use(segundoIntermediario)
+
 
 //PARAMETRO DE CONSULTA (query)
 //localhost:3000/professores
 //CUANDO A IMPORTACAO E CRIANDO UMA VARIAVEI
 //app.get('/professores', controladorProfessores.filtrarProfessores);
-app.get('/professores', filtrarProfessores);
+app.get('/professores', intermediarioDaRota, filtrarProfessores);
 //ROTA COM PARAMETROS (params)
 //localhost:3000/professores/1
 //CUANDO A IMPORTACAO E CRIANDO UMA VARIAVEI
