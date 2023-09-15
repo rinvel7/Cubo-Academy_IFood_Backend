@@ -3,9 +3,11 @@ const carros = require('../bd')
 
 // A rota de listagem dos carros deve permitir FILTRAR carros pela MARCA e pela COR.
 const listagemDeCarros = (req, res) =>{
-    console.log('liste los carros');
+    
     const { marca, cor } = req.query;
     let resultado = carros;
+    //Adiciona una nova propiedade
+    resultado.splice()
 
     if(marca){
         resultado = resultado.filter((carro)=>{
@@ -21,7 +23,6 @@ const listagemDeCarros = (req, res) =>{
 }
 
 const encontrarUmCarro =(req, res) =>{
-    console.log('encontre un carro');
     const carroEncontrado = carros.find((carro)=>{
         return carro.id === Number(req.params.id)
     })
