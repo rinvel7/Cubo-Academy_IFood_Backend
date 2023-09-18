@@ -14,15 +14,15 @@ const {
 const app = express();
 
 //INTERMEDIARIOS INDEPENDIENTES
-const primeiroIntermediario = ((req, res, next)=>{
-    console.log('Passei meu primeiro intermediario');
-    next();
-});
+//const primeiroIntermediario = ((req, res, next)=>{
+//    console.log('Passei meu primeiro intermediario');
+//    next();
+//});
 
-const segundoIntermediario = ((req, res, next)=>{
-    console.log('Passei meu segundo intermediario');
-    next();
-});
+//const segundoIntermediario = ((req, res, next)=>{
+//    console.log('Passei meu segundo intermediario');
+//    next();
+//});
 
 //INTERMEDIARIOS DA ROTA
 const intermediarioDaRota = ((req, res, next)=>{
