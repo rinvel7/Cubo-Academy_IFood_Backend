@@ -84,7 +84,6 @@ const atualizarStatusInstrutor = (req, res) =>{
 const excluirInstrutor = (req, res) => {
     const { id } = req.params;
 
-
     const instrutor = instrutores.find((instrutor) =>{
         return instrutor.id === Number(id);
     });

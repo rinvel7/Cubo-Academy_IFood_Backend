@@ -12,6 +12,11 @@ rotas.put('/instrutores/:id', instrutores.atualizarInstrutor);
 rotas.patch('/instrutores/:id/status', instrutores.atualizarStatusInstrutor);
 rotas.delete('/instrutores/:id', instrutores.excluirInstrutor)
 
-rotas.post('/instrutores/:idInstrutor/aulas', aulas.cadastrarAula)
+//EXERCICIO RESOLVIDO 1
+rotas.post('/instrutores/:idInstrutor/aulas', aulas.cadastrarAula);
+rotas.get('/aulas', aulas.listarAulas);
+rotas.get('/aulas/:id', aulas.obterAulas)
+rotas.get('/instrutores/:idInstrutor/aulas', aulas.obterAulaInstrutor);
+
 
 module.exports = rotas;
