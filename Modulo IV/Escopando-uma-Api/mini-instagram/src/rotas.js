@@ -5,7 +5,13 @@ const {
     obterPerfil
 } = require('./controladores/usuarios')
 const login = require('./controladores/login')
-const verificarLogin =require('./filtros/VerificaLogin')
+const verificarLogin =require('./filtros/VerificaLogin');
+const { 
+    novaPostagem, 
+    curtir, 
+    comentar, 
+    feed 
+} = require('./controladores/postagens');
 
 const rotas = express()
 
@@ -23,6 +29,12 @@ rotas.get('/perfil', obterPerfil)
 rotas.put('/perfil', atualizarPerfil)
 
 //postagen
+rotas.post('/postagens', novaPostagem)
+rotas.get('/postagens', feed)
+rotas.post('/postagens/:postagemId/curtir', curtir)
+rotas.post('/postagens/:postagemId/comentar', comentar)
+
+
 
 module.exports = rotas;
 
