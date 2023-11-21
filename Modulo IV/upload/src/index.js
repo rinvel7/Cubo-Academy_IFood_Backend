@@ -1,61 +1,45 @@
 require('dotenv').config()
 const express = require('express')
 const multer = require('./multer')
-const aws = require('aws-sdk')
-
-const endpoint = new aws.Endpoint(process.env.ENDPOINT_S3)
-
-const s3 = new aws.S3({
-    endpoint,
-    credentials: {
-        accessKeyId: process.env.KEY_ID,
-        secretAccessKey: process.env.APP_KEY
-    }
-})
+const { uploadFile, listagemArquivos, excluirArquivo } = require('./storage')
 
 const app = express()
 
 app.use(express.json())
 
-app.post('/upload', multer.single('arquivo'), async(req, res) => {
-    const  { file } = req
-    
+app.post('/upload', multer.single('arquivo'), async (req, res) => {
+    const { file } = req
+
     try {
-        const arquivo = await s3.upload({
-            Bucket: process.env.BACKBLAZE_BUCKET,
-            Key: `imagens/${file.originalname}`,
-            Body: file.buffer,
-            ContentType: file.mimetype
-        }).promise()
-    return res.json({
-        url: arquivo.Location,
-        path: arquivo.Key
-    })
- } catch (error) {
-    return res.json({mensagem: 'Erro interno do servidor'})
- }
-    
+        const arquivo = await uploadFile(
+            `imagens/${file.originalname}`,
+            file.buffer,
+            file.mimetype
+        )
+
+        return res.status(201).json(arquivo)
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({mensagem: 'Erro interno do servidor'})
+    }
 })
+
 app.post('/upload-multiple', multer.array('arquivo'), async (req, res) => {
     const { files } = req
-    console.log(files);
 
     try {
         const resultado = []
 
         for (const file of files) {
-            const arquivo = await s3.upload({
-                Bucket: process.env.BACKBLAZE_BUCKET,
-                Key: `imagens/multiplas/${file.originalname}`,
-                Body: file.buffer,
-                ContentType: file.mimetype
-            }).promise()
+            const arquivo = await uploadFile(
+                `imagens/${file.originalname}`,
+                file.buffer,
+                file.mimetype
+            )
 
-        resultado.push({
-            url: arquivo.Location,
-            path: arquivo.Key
-        })
-    }
+            resultado.push(arquivo)
+        }
+
         return res.json(resultado)
     } catch (error) {
         console.log(error)
@@ -65,19 +49,24 @@ app.post('/upload-multiple', multer.array('arquivo'), async (req, res) => {
 
 app.get('/arquivos', async (req, res) => {
     try {
-        const arquivos = await s3.listObjects({
-            Bucket: process.env.BACKBLAZE_BUCKET
-        }).promise()
-        
-        const files = arquivos.Contents.map((file) => {
-            return {
-                url: `https://${process.env.BACKBLAZE_BUCKET}.${process.env.ENDPOINT_S3}/${file.Key}`,
-                path: file.Key
-            }
-         })
-         return res.json(files)
+        const files = await listagemArquivos()
+    
+        return res.json(files)
     } catch (error) {
-        console.log(error);
+        console.log(error)
+        return res.status(500).json({mensagem: 'Erro interno do servidor'})
+    }
+})
+
+app.delete('/arquivo', async (req, res) => {
+    const { file } = req.query
+
+    try {
+        await excluirArquivo(file)
+
+        return res.status(204).send()
+    } catch (error) {
+        console.log(error)
         return res.status(500).json({mensagem: 'Erro interno do servidor'})
     }
 })

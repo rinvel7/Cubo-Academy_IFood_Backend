@@ -24,30 +24,6 @@ const uploadFile = async (path, buffer, mimetype) => {
     }
 }
 
-app.post('/upload-multiple', multer.array('arquivo'), async (req, res) => {
-    const { files } = req
-
-    try {
-        const resultado = []
-
-        for (const file of files) {
-            const arquivo = await uploadFile(
-                `imagens/${file.originalname}`,
-                file.buffer,
-                file.mimetype
-            )
-
-            resultado.push(arquivo)
-        }
-
-        return res.json(resultado)
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json({mensagem: 'Erro interno do servidor'})
-    }
-})
-
-
 const listagemArquivos = async () => {
     const arquivos = await s3.listObjects({
         Bucket: process.env.BACKBLAZE_BUCKET
